@@ -1,0 +1,1 @@
+{"apikey": ["<API_KEY>"], "bucket_name": ["<NAME_OF_BUCKET>"], "host": ["<SELENIUM_HOST_ADDRESS>"], "port":["<SELENIUM_PORT>"], "region":["<REGION>"], "test_path":["<BUCKET_PATH_TEST>"]}
