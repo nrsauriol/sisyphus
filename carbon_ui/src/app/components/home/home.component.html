@@ -1,0 +1,117 @@
+<app-header></app-header>
+<main class="bx--content">
+	<div ibmGrid condensed="false">
+		<div ibmRow gutter="true" leftGutter="true" rightGutter="true" condensed="false">
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Api Key</p>
+					<input [(ngModel)]="apiKey" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Bearer Token</p>
+					<input [(ngModel)]="token" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+			<div ibmCol [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Region</p>
+					<input [(ngModel)]="region" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+		</div>
+		<br>
+		<div ibmRow gutter="true" leftGutter="true" rightGutter="true" condensed="false">
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Bucket Name</p>
+					<input [(ngModel)]="bucketName" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Bucket Service Instance Id</p>
+					<input [(ngModel)]="serviceInstanceId" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+		</div>
+		<br>
+		<div ibmRow gutter="true" leftGutter="true" rightGutter="true" condensed="false">
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Function Endpoint</p>
+					<input [(ngModel)]="functionEndpoint" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Function Namespace</p>
+					<input [(ngModel)]="namespace" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+				
+			</div>
+		</div>
+		<br>
+		<div ibmRow gutter="true" leftGutter="true" rightGutter="true" condensed="false">
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Selenium Host</p>
+					<input [(ngModel)]="seleniumHost" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+			<div ibmCol class="separator" [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Selenium Port</p>
+					<input [(ngModel)]="seleniumPort" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+			<div ibmCol [columnNumbers]="{'md': 2, 'sm': 12}">
+				<ibm-label [skeleton]="skeletonInput">
+					<p *ngIf="!skeletonInput">Iterations</p>
+					<input [(ngModel)]="iterations" ibmText [skeleton]="!skeletonInput" size="md" theme="dark">
+				</ibm-label>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div class="div-center">
+		<ibm-file-uploader title="Upload Test" description="Please attach the JS file to test." buttonText="Select"
+			buttonType="primary" [accept]="accept" [skeleton]="skeleton" [(files)]="files" [disabled]="disabled">
+		</ibm-file-uploader>
+		<p [id]="notificationId" style="width: 300px; margin-top: 20px"></p>
+		<button ibmButton *ngIf="files && files.size > 0" (click)="onUpload()">
+			Upload Test
+		</button>
+		<br>
+		<button ibmButton *ngIf="functionName" (click)="sendTest()">
+			Launch Test
+		</button>
+	</div>
+
+	<ibm-loading *ngIf="isActiveLoading" [isActive]="isActiveLoading" overlay="true" style="width: 100vw !important; height: 95vh !important;"></ibm-loading>
+
+	<!-- Images and Logs -->
+	<div ibmGrid condensed="false">
+		<div *ngFor="let item of data; let index=index" style="margin-top: 45px;">
+			<h4>Iteration {{index+1}} - Activation ID: {{ item.activationId }}</h4>
+			<div ibmRow gutter="true" leftGutter="true" rightGutter="true" condensed="true">
+				<div ibmCol class="separator" [columnNumbers]="{'md': 3, 'sm': 12}">
+					<div style="overflow-y: scroll; height:500px;">
+						<div *ngFor="let log of item.logs" class="div-theme-log">
+							{{log}}
+						</div>
+					</div>
+				</div>
+				<div ibmCol class="" [columnNumbers]="{'md': 3, 'sm': 12}">
+					<div style="width: 100%; height: 100%;">
+						<slider-carousel [images]="item.images"></slider-carousel>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>

@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+$font-path: '~carbon-components/src/globals/fonts';
+@import "~carbon-components/scss/globals/scss/styles.scss";
+@import '~slider-carousel/slider-carousel.scss';
+@include slider-carousel();
